@@ -4,19 +4,24 @@ import 'package:news_cloud/models/article_model.dart';
 class NewsService {
   final Dio dio;
   NewsService(this.dio);
+
   Future<List<ArticleModel>> getNew() async {
     Response response = await dio.get(
         'https://newsapi.org/v2/top-headlines?country=us&apiKey=d96cf4c46f0e41ddaf4b336c5a0a8adb&category=general');
-
     var jsondata = response.data;
     List<dynamic> articles = jsondata['articles'];
     List<ArticleModel> articlesList = [];
 
     for (var article in articles) {
+      Source source = Source(
+        id: article['source']['id'],
+        name: article['source']['name'],
+      );
       ArticleModel articleModel = ArticleModel(
           title: article['title'],
-          description: article['content'],
-          imageUrl: article['urlToImage']);
+          subtitle: article['description'],
+          image: article['urlToImage'],
+          source: source);
 
       articlesList.add(articleModel);
     }
@@ -41,10 +46,15 @@ class NewsService {
     List<ArticleModel> articlesList = [];
 
     for (var article in articles) {
+      Source source = Source(
+        id: article['source']['id'],
+        name: article['source']['name'],
+      );
       ArticleModel articleModel = ArticleModel(
           title: article['title'],
-          description: article['content'],
-          imageUrl: article['urlToImage']);
+          subtitle: article['description'],
+          image: article['urlToImage'],
+          source: source);
 
       articlesList.add(articleModel);
     }

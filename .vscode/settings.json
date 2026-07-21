@@ -1,4 +1,7 @@
 {
-  "cSpell.words": ["allprojects"],
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "cSpell.words": [
+    "allprojects"
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "dart.flutterSdkPath": ".fvm/versions/3.35.7"
 }
