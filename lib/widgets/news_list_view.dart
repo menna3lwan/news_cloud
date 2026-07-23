@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:news_cloud/services/news_service.dart';
+
 import './news_tiles.dart';
 
 import 'package:flutter/material.dart';
@@ -8,6 +11,10 @@ class NewsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    NewsService newsService = NewsService(Dio());
+    newsService.getNew();
+  
     return ListView.builder(
       itemBuilder: (context, index) {
         if (index == 0) {
