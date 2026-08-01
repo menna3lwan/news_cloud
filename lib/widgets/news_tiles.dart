@@ -1,7 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class NewsTiles extends StatelessWidget {
-  const NewsTiles({super.key});
+  const NewsTiles({
+    Key? key,
+    required this.articleModel,
+  }) : super(key: key);
+  final ArticleModel articleModel;
 
   @override
   Widget build(BuildContext context) {
