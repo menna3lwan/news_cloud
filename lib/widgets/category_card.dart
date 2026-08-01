@@ -29,7 +29,7 @@ class _CategoryCardState extends State<CategoryCard> {
       child: Center(
         child: Text(
           widget.categoryName,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.white,
