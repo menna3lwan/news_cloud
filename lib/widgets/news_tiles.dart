@@ -1,17 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:news_cloud/models/article_model.dart';
 
 class NewsTiles extends StatelessWidget {
   const NewsTiles({
-    Key? key,
+    super.key,
     required this.articleModel,
-  }) : super(key: key);
+  });
+
   final ArticleModel articleModel;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12.0),
+      margin: const EdgeInsets.only(bottom: 12.0, left: 8.0, right: 8.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18.0),
@@ -33,33 +35,50 @@ class NewsTiles extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(18.0),
               child: Image.network(
-                'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
+                articleModel.image ?? 'https://via.placeholder.com/400x200?text=No+Image',
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 200,
+                    width: double.infinity,
+                    color: Colors.grey[300],
+                    child: const Center(
+                      child: Text('Image not available'),
+                    ),
+                  );
+                },
               ),
             ),
           ),
-
           const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: const Text(
-              'News Title',
+            padding: const EdgeInsets.only(left: 18.0, right: 8.0),
+            child: Text(
+              articleModel.title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-
           const SizedBox(height: 4),
           Padding(
-            padding: const EdgeInsets.only(left: 18.0, bottom: 20.0),
+            padding: const EdgeInsets.only(left: 18.0, right: 8.0, bottom: 20.0),
             child: Text(
-              'News Description goes here and can be two lines max.',
+              articleModel.subtitle ?? 'No description available',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 18.0, right: 8.0, bottom: 12.0),
+            child: Text(
+              'Source: ${articleModel.source.name}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 12, color: Colors.grey[500]),
             ),
           ),
         ],
