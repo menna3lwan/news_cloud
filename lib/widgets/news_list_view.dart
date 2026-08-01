@@ -16,9 +16,9 @@ class _NewsListViewState extends State<NewsListView> {
   List<ArticleModel> articlesList = [];
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    getGeneralNews();
+    await getGeneralNews();
   }
 
   Future<void> getGeneralNews() async {
