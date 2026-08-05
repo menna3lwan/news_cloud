@@ -16,9 +16,9 @@ class _NewsListViewState extends State<NewsListView> {
   List<ArticleModel> articlesList = [];
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    await getGeneralNews();
+    getGeneralNews();
   }
 
   Future<void> getGeneralNews() async {
@@ -34,6 +34,15 @@ class _NewsListViewState extends State<NewsListView> {
 
   @override
   Widget build(BuildContext context) {
+    if (articlesList.isEmpty) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.only(top: 40.0),
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return CustomScrollView(
       slivers: [
         SliverList(
