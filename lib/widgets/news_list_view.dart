@@ -14,6 +14,7 @@ class NewsListView extends StatefulWidget {
 
 class _NewsListViewState extends State<NewsListView> {
   List<ArticleModel> articlesList = [];
+ bool isLoading = true;
 
   @override
   void initState() {
@@ -23,8 +24,14 @@ class _NewsListViewState extends State<NewsListView> {
 
   Future<void> getGeneralNews() async {
     NewsService newsService = NewsService(Dio());
+
     articlesList = await newsService.getNew();
-    setState(() {});
+    isLoading = false;
+    setState(() {
+
+
+
+    });
   }
 
   @override
@@ -32,8 +39,13 @@ class _NewsListViewState extends State<NewsListView> {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+
+
+
     if (articlesList.isEmpty) {
       return const Center(
         child: Padding(
@@ -43,7 +55,9 @@ class _NewsListViewState extends State<NewsListView> {
       );
     }
 
-    return CustomScrollView(
+    return isLoading ? const Center(
+      child: CircularProgressIndicator(),
+    ) : CustomScrollView(
       slivers: [
         SliverList(
           delegate: SliverChildBuilderDelegate(
