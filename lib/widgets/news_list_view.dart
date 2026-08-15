@@ -13,7 +13,7 @@ class NewsListView extends StatefulWidget {
 }
 
 class _NewsListViewState extends State<NewsListView> {
-  List<ArticleModel> articlesList = [];
+final  List<ArticleModel> articlesList = [];
  bool isLoading = true;
 
   @override
@@ -28,8 +28,6 @@ class _NewsListViewState extends State<NewsListView> {
     articlesList = await newsService.getNew();
     isLoading = false;
     setState(() {
-
-
 
     });
   }
